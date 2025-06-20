@@ -9,6 +9,10 @@ package com.mycompany.guessnum;
  * @author mclr
  */
 import java.util.Scanner;
+<<<<<<< HEAD
+=======
+import java.util.Random;
+>>>>>>> 60e81a95ee1ffb81b14004dc0edc66f6c8fad4ea
 
 public class GuessNum {
     public static void main(String[] args) {
