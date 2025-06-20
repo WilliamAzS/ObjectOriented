@@ -12,18 +12,19 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Player implements Serializable {
-    private final String name;
-    private final int maxTries;
-    private final String target;
-    private final List<PowerUp> powerUps;
+    String name;
+    int maxTries;
+    String target;
+    List<PowerUp> powerUps = new ArrayList<>();
+    private int score = 0;
+    private int bestScore = 0;
 
     public Player(String name, int maxTries, String target) {
         this.name = name;
         this.maxTries = maxTries;
         this.target = target;
-        this.powerUps = new ArrayList<>();
-        powerUps.add(randomPowerUp());
-        powerUps.add(randomPowerUp());
+        this.powerUps.add(randomPowerUp());
+        this.powerUps.add(randomPowerUp());
     }
 
     private PowerUp randomPowerUp() {
@@ -35,18 +36,14 @@ public class Player implements Serializable {
         };
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getMaxTries() {
-        return maxTries;
-    }
-
     public void showPowerUps() {
+        if (powerUps.isEmpty()) {
+            System.out.println("No power-ups left.");
+            return;
+        }
         System.out.println("Available Power-Ups:");
         for (int i = 0; i < powerUps.size(); i++) {
-            System.out.println((i + 1) + ". " + powerUps.get(i).getName());
+            System.out.println((i + 1) + ". " + powerUps.get(i).name);
         }
     }
 
@@ -57,5 +54,21 @@ public class Player implements Serializable {
         }
         powerUps.get(index - 1).use(game, this);
         powerUps.remove(index - 1);
+    }
+
+    public void calculateScore(int attempts) {
+        this.score = Math.max(0, 100 - 10 * (attempts - 1));
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getBestScore() {
+        return bestScore;
+    }
+
+    public void setBestScore(int score) {
+        this.bestScore = score;
     }
 }
