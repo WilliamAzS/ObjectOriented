@@ -1,0 +1,3 @@
+Oren,40
+Wials,30
+Oren,0
